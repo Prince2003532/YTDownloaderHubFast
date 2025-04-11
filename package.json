@@ -1,13 +1,17 @@
 {
   "name": "ytdl-api",
   "version": "1.0.0",
+  "description": "A simple YouTube video info & downloader API",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
+  "keywords": ["youtube", "video", "downloader", "api", "ytdl-core"],
+  "author": "Prince",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "ytdl-core": "^5.2.0"
+    "ytdl-core": "^4.11.3"
   }
 }
