@@ -3,7 +3,7 @@ const ytdl = require('ytdl-core');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -106,4 +106,4 @@ app.post('/download', async (req, res) => {
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`Server running on port ${port}`);
-});
+})
