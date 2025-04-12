@@ -11,17 +11,24 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('YouTube Downloader API is running');
 });
+const ytdl = require("ytdl-core");
 
-app.get('/video-info', async (req, res) => {
+app.get("/videoInfo", async (req, res) => {
   try {
-    console.log('Video info request received');
-    const videoURL = req.query.url;
-    if (!videoURL) {
-      console.log('Error: No video URL provided');
-      return res.status(400).json({ error: 'Video URL is required' });
+    const url = req.query.url;
+    if (!ytdl.validateURL(url)) {
+      return res.status(400).json({ error: "Invalid URL" });
     }
 
-    console.log('Fetching video info for:', videoURL);
+    const info = await ytdl.getInfo(url);
+    res.json(info);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch video info" });
+  }
+});
+
+app.geconsole.log('Fetching video info for:', videoURL);
     const info = await ytdl.getInfo(videoURL);
     const formats = info.formats.map(format => ({
       quality: format.qualityLabel || 'Audio Only',
