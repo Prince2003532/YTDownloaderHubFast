@@ -1,18 +1,16 @@
 {
-  "name": "nodejs",
+  "name": "yt-downloader-api",
   "version": "1.0.0",
+  "description": "YouTube Video Downloader API using Express and ytdl-core",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Prince",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^22.13.11",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "ytdl-core": "npm:@distube/ytdl-core@^4.16.8"
-  },
-  "description": ""
+    "@distube/ytdl-core": "^4.16.8"
+  }
 }
