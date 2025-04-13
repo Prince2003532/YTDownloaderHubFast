@@ -1,6 +1,5 @@
-
- {
-  "name": "ytdl-core",
+{
+  "name": "nodejs",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -12,8 +11,8 @@
   "dependencies": {
     "@types/node": "^22.13.11",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "ytdl-core": "^4.18.4"
+    "express": "^5.1.0",
+    "ytdl-core": "npm:@distube/ytdl-core@^4.16.8"
   },
   "description": ""
 }
