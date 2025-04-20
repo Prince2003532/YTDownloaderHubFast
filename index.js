@@ -6,14 +6,16 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('YouTube Downloader API is live!');
 });
 
-app.get('/api/download', async (req, res) => {
+app.post('/api/download', async (req, res) => {
   try {
-    const videoURL = req.query.url;
+    const videoURL = req.body.url;
+
     if (!videoURL || !ytdl.validateURL(videoURL)) {
       return res.status(400).json({
         success: false,
@@ -32,21 +34,31 @@ app.get('/api/download', async (req, res) => {
 
     const formats = ytdl.filterFormats(info.formats, 'videoandaudio');
 
+    const sortedFormats = formats
+      .filter(f => f.hasAudio && f.hasVideo && f.url)
+      .map(f => ({
+        quality: f.qualityLabel,
+        container: f.container,
+        url: f.url,
+        mimeType: f.mimeType,
+      }))
+      .sort((a, b) => {
+        const aNum = parseInt(a.quality) || 0;
+        const bNum = parseInt(b.quality) || 0;
+        return bNum - aNum;
+      });
+
     res.json({
       success: true,
       title: info.videoDetails.title,
-      formats: formats.map(format => ({
-        quality: format.qualityLabel,
-        itag: format.itag,
-        mimeType: format.mimeType,
-        url: format.url
-      }))
+      thumbnail: info.videoDetails.thumbnails.pop()?.url || '',
+      formats: sortedFormats
     });
   } catch (error) {
-    console.error(error);
+    console.error('Error:', error);
     res.status(500).json({
       success: false,
-      message: error.message || 'Download failed'
+      message: error.message || 'Something went wrong!'
     });
   }
 });
