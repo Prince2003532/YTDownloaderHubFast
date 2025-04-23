@@ -24,13 +24,15 @@ app.post('/api/download', async (req, res) => {
     }
 
     const info = await ytdl.getInfo(videoURL, {
-      requestOptions: {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 Chrome/113.0.0.0 Safari/537.36',
-          'Accept-Language': 'en-US,en;q=0.9',
-        }
-      }
-    });
+  requestOptions: {
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/122.0.0.0 Safari/537.36',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Accept': '*/*',
+      'Referer': 'https://www.youtube.com/'
+    }
+  }
+});
 
     const formats = ytdl.filterFormats(info.formats, 'videoandaudio');
 
