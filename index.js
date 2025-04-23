@@ -58,5 +58,5 @@ app.get('/api/download', async (req, res) => {
 
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on port 5000 ${port}`);
+  console.log(`Server running on port 5000 `);
 });
